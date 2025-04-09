@@ -9,11 +9,11 @@ class TaskQuery
 
   def call
     scope = case filter
-            when "expired"
+    when "expired"
               project.tasks.expired
-            else
+    else
               project.tasks.non_expired
-            end
+    end
 
     scope.order(Arel.sql("CASE WHEN completed_at IS NULL THEN 0 ELSE 1 END, completed_at ASC"))
   end

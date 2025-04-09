@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :fetch_project
-  before_action :fetch_task, only: [:edit, :complete, :update, :destroy]
+  before_action :fetch_task, only: [ :edit, :complete, :update, :destroy ]
 
   def create
     @task = @project.tasks.new(task_params)

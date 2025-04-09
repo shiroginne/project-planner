@@ -11,7 +11,7 @@ RSpec.describe TaskQuery do
     context "when filter is 'active'" do
       it "returns non-expired tasks ordered by completed_at" do
         result = TaskQuery.new(project: project, filter: "active").call
-        expect(result).to eq([active_task_1, active_task_2])
+        expect(result).to eq([ active_task_1, active_task_2 ])
       end
     end
 
