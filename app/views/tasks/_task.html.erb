@@ -1,19 +1,29 @@
-<%= turbo_frame_tag dom_id(task), class: "bg-white border border-gray-200 rounded p-4 shadow-sm flex items-center justify-between hover:shadow-md transition" do %>
-  <div class="text-gray-800 font-medium">
-    <%= task.name %>
+<%= turbo_frame_tag dom_id(task), class: "bg-white border rounded p-3 shadow-sm flex justify-between items-center #{'opacity-60' if task.completed?}" do %>
+  <div class="flex items-center space-x-3">
+    <% if task.completed? %>
+      <div class="w-5 h-5 flex items-center justify-center text-green-600 text-sm">✅</div>
+    <% else %>
+      <%= form_with url: complete_project_task_path(task.project, task),
+                    method: :patch,
+                    data: { turbo_frame: dom_id(task) },
+                    class: "w-6 h-6" do %>
+        <button type="submit" class="w-full h-full text-gray-400 hover:text-blue-500 text-base transition select-none">⬜</button>
+      <% end %>
+    <% end %>
+    <span class="<%= 'line-through text-gray-500' if task.completed? %>"><%= task.name %></span>
   </div>
 
   <div class="flex space-x-2">
     <%= link_to "Edit",
                 edit_project_task_path(task.project, task),
                 data: { turbo_frame: dom_id(task) },
-                class: "text-blue-600 hover:text-blue-800 text-sm px-3 py-1 border border-blue-500 rounded transition" %>
+                class: "text-blue-600 text-sm" %>
 
     <%= button_to "Delete",
                   project_task_path(task.project, task),
                   method: :delete,
                   data: { turbo_confirm: "Are you sure?" },
                   form: { "data-turbo-frame": "_top" },
-                  class: "text-white bg-red-500 hover:bg-red-600 text-sm px-3 py-1 rounded" %>
+                  class: "bg-red-500 text-white px-2 py-1 rounded text-sm" %>
   </div>
 <% end %>

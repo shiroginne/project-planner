@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :fetch_project
-  before_action :fetch_task, only: [:edit, :update, :destroy]
+  before_action :fetch_task, only: [:edit, :complete, :update, :destroy]
 
   def create
     @task = @project.tasks.new(task_params)
@@ -12,6 +12,15 @@ class TasksController < ApplicationController
       end
     else
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def complete
+    @task.update!(completed_at: Time.current)
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to project_path(@project), notice: "Task marked as complete" }
     end
   end
 

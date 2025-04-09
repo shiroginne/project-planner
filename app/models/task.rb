@@ -9,6 +9,10 @@ class Task < ApplicationRecord
 
   before_create :set_default_expiration
 
+  def completed?
+    completed_at.present?
+  end
+
   private
 
   def set_default_expiration
