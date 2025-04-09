@@ -6,14 +6,7 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @filter = params[:filter] || "active"
-
-    @tasks =
-      case @filter
-      when "expired"
-        @project.tasks.expired
-      else
-        @project.tasks.non_expired
-      end
+    @tasks = TaskQuery.new(project: @project, filter: @filter).call
   end
 
   def create
