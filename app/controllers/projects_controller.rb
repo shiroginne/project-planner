@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-    @pagy, @projects = pagy(Project.order(created_at: :desc), items: 20)
+    @pagy, @projects = pagy(Project.order(:name), items: 20)
   end
 
   def show
