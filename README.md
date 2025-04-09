@@ -1,5 +1,17 @@
 # README
 
+# Project Planner
+
+A simple, modern Ruby on Rails 8 app for experimenting with [Hotwire](https://hotwired.dev) and Turbo-driven interfaces.
+
+This app lets you:
+- Create and manage projects and tasks
+- Use Turbo Frames and Streams for real-time updates
+- Avoid full-page reloads while maintaining clean Rails architecture
+- Explore TailwindCSS styling and paginated UIs via [pagy](https://github.com/ddnexus/pagy)
+
+It’s designed to be beginner-friendly yet demonstrate core Hotwire concepts using Rails 8’s default tooling (no JavaScript frameworks needed).
+
 ### How to Run
 
 This is a single-page Rails 8 app using Hotwire (Turbo), TailwindCSS, and SQLite.
